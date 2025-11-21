@@ -7,6 +7,7 @@ export interface QAItem {
 
 export interface QADataStructure {
   items: QAItem[];
+  keywords?: string[];
 }
 
 export interface UploadError {

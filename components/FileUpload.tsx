@@ -4,7 +4,7 @@ import { Upload, Download } from 'lucide-react';
 import { QAItem } from '../types';
 
 interface FileUploadProps {
-  onUploadSuccess: (items: QAItem[]) => void;
+  onUploadSuccess: (items: QAItem[], keywords?: string[]) => void;
   onUploadError: (msg: string) => void;
 }
 
@@ -32,6 +32,11 @@ export const FileUpload: React.FC<FileUploadProps> = ({ onUploadSuccess, onUploa
         // Support both { items: [...] } format or just direct array [...]
         const items = Array.isArray(json) ? json : json.items;
 
+        // Extract optional keywords if present
+        const uploadedKeywords = !Array.isArray(json) && Array.isArray(json.keywords)
+          ? json.keywords.filter((k: any) => typeof k === 'string')
+          : undefined;
+
         if (!Array.isArray(items)) {
           throw new Error('JSON must contain an "items" array or be an array itself.');
         }
@@ -48,7 +53,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({ onUploadSuccess, onUploa
           throw new Error('Some items are missing required fields (id, question, answer).');
         }
 
-        onUploadSuccess(items);
+        onUploadSuccess(items, uploadedKeywords);
       } catch (err) {
         onUploadError(err instanceof Error ? err.message : 'Failed to parse JSON file.');
       }
@@ -67,6 +72,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({ onUploadSuccess, onUploa
 
   const handleDownloadTemplate = () => {
     const template = {
+      keywords: ["example", "json", "guide"],
       items: [
         {
           id: "sample-1",

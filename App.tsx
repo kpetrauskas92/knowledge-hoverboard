@@ -1,9 +1,9 @@
-
 import React, { useState, useCallback, useEffect, useMemo } from 'react';
 import { MessageCircleQuestion, AlertCircle, CheckCircle2, Sparkles, RotateCcw, Plus, X } from 'lucide-react';
 import { QACard } from './components/QACard';
 import { FileUpload } from './components/FileUpload';
 import { HoverButton } from './components/HoverButton';
+import { Notepad } from './components/Notepad';
 import { DEFAULT_QA_ITEMS } from './constants';
 import { QAItem } from './types';
 import { getTopKeywords } from './utils';
@@ -91,11 +91,14 @@ function App() {
     });
   }, []);
 
-  const handleUploadSuccess = (newItems: QAItem[]) => {
+  const handleUploadSuccess = (newItems: QAItem[], uploadedKeywords?: string[]) => {
     setItems(newItems);
     setOpenIds(new Set()); 
     setActiveKeyword('');
-    setCustomKeywords([]); // Reset custom keywords
+    
+    // If keywords provided in file, use them, otherwise reset
+    setCustomKeywords(uploadedKeywords || []);
+    
     setHiddenKeywords(new Set()); // Reset hidden keywords
     setError(null);
     setSuccessMsg(`Successfully loaded ${newItems.length} questions.`);
@@ -140,7 +143,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
+    <div className="min-h-screen bg-slate-50 flex flex-col font-sans relative pb-16">
       {/* Header */}
       <header className="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -307,6 +310,9 @@ function App() {
           </div>
         )}
       </main>
+
+      {/* Sticky Notepad */}
+      <Notepad />
     </div>
   );
 }
