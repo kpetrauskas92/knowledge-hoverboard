@@ -1,9 +1,10 @@
+
 import React, { useState, useCallback, useEffect, useMemo } from 'react';
 import { MessageCircleQuestion, AlertCircle, CheckCircle2, Sparkles, RotateCcw, Plus, X } from 'lucide-react';
 import { QACard } from './components/QACard';
 import { FileUpload } from './components/FileUpload';
 import { HoverButton } from './components/HoverButton';
-import { Notepad } from './components/Notepad';
+import { StaticNotepad } from './components/StaticNotepad';
 import { DEFAULT_QA_ITEMS } from './constants';
 import { QAItem } from './types';
 import { getTopKeywords } from './utils';
@@ -143,7 +144,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col font-sans relative pb-16">
+    <div className="min-h-screen bg-slate-50 flex flex-col font-sans relative pb-8">
       {/* Header */}
       <header className="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -309,10 +310,10 @@ function App() {
             </div>
           </div>
         )}
-      </main>
 
-      {/* Sticky Notepad */}
-      <Notepad />
+        {/* Static Notepad Area - Placed at bottom of main content */}
+        <StaticNotepad />
+      </main>
     </div>
   );
 }
