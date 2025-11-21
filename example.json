@@ -1,0 +1,25 @@
+
+{
+  "items": [
+    {
+      "id": "101",
+      "question: "What is the structure of this file?",
+      "answer": "This file is a JSON object containing an 'items' array. Each item represents a question card."
+    },
+    {
+      "id": "102",
+      "question: "What fields are required?",
+      "answer": "Each item must have a unique 'id', a 'question' string, and an 'answer' string."
+    },
+    {
+      "id": "103",
+      "question: "Can I put HTML in the answer?",
+      "answer": "Currently, the answer is displayed as plain text. It will wrap automatically to fit the card width."
+    },
+    {
+      "id": "104",
+      "question: "How many questions can I add?",
+      "answer": "You can add hundreds of questions. The application uses a masonry layout to organize them efficiently across columns."
+    }
+  ]
+}

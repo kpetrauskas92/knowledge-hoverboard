@@ -1,0 +1,5 @@
+{
+  "name": "Responsive Q&A Board",
+  "description": "A dynamic, accessible, and responsive Q&A board that supports JSON file uploads and masonry layout.",
+  "requestFramePermissions": []
+}
